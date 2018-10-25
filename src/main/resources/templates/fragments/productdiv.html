@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product DIV Fragment</title>
+    <meta charset="UTF-8"/>
+    <title th:text="#{index.page.title}">Page Title</title>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" media="screen"
+          th:href="@{/css/bootstrap-3.3.7-dist/css/bootstrap.css}"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/js/jquery-2.2.4.min.js}"></script>
+
+    <link th:href="@{/css/custom.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="col-md-4" th:fragment="productdiv">
+    <div class="course-listing">
+        <div class="row">
+            <a href="/product/1" th:href="@{${'/product/' + product.id}}">
+                <div class="col-lg-12">
+                    <div class="course-box-image-container">
+                        <img role="presentation"
+                             src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:705/https://d2vvqscadf4c1f.cloudfront.net/scgeIJ9wRGGNWvK0jAld_ThumbFREE_01.png"
+                             class="course-box-image" th:src="@{${'/images/' + product.imageUrl}}">
+                    </div>
+                    <div class="course-listing-title" th:text="${product.courseName}">
+                        Introduction to Spring
+                    </div>
+                    <div class="course-listing-subtitle" th:text="${product.courseSubtitle}">
+                        Introductory Course for the Spring Framework
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="row course-listing-extra-info col-xs-12">
+            <div class="col-xs-8">
+                <img align="left" alt="John Thompson"
+                     src="https://process.fs.teachablecdn.com/ADNupMnWyR7kCWRvm76Laz/resize=width:30,height:30/https://d2vvqscadf4c1f.cloudfront.net/uZC7XjnzTMyJJeq5hShi_IMG_2800square.jpg"
+                     class="img-circle" th:src="@{${'/images/' + product.author.image}}"/>
+                <div class="small course-author-name" th:text="${product.author.firstName + ' ' + product.author.lastName}">
+                    John Thompson
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <!-- in essence, if the product price is 199, this reads, if product.price is greater than 0,
+                print out the product price (with a $ in front), else print "FREE" -->
+                <div class="small course-price" th:text="${product.price > 0 ? '$' + product.price : 'FREE'}">
+                    FREE
+                </div>
+            </div>
+            <div class="row col-xs-12">
+                <ol class="breadcrumb">
+                    <li th:each="cat : ${product.productCategories}"><a href="#" th:text="${cat.category}">Cat 1</a></li>
+                    <li th:remove="all"><a href="#">Cat 2</a></li>
+                    <li th:remove="all"><a href="#">Cat 3</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
