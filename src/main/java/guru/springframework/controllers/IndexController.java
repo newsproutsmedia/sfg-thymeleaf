@@ -16,11 +16,18 @@ public class IndexController {
         this.productService = productService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "index"})
     public String getIndex(Model model){
 
         model.addAttribute("products", productService.listProducts());
 
         return "index";
+    }
+
+    @RequestMapping("secured")
+    public String getSecured() {
+
+        return "secured";
+
     }
 }

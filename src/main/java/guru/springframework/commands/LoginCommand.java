@@ -1,17 +1,14 @@
 package guru.springframework.commands;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 public class LoginCommand {
 
     @NotEmpty
-    @Size(min = 5, max = 50)
-    public String username;
+    private String username;
 
     @NotEmpty
-    @Size(min = 8, max = 50)
-    public String password;
+    private String password;
 
     public String getUsername() {
         return username;

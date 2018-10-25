@@ -1,36 +1,45 @@
 package guru.springframework.controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import guru.springframework.commands.LoginCommand;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+
 @Controller
 public class LoginController {
 
     @RequestMapping("/login")
-    public String loginForm(Model model) {
+    public String showSecuredPage(Model model) {
 
         model.addAttribute("loginCommand", new LoginCommand());
 
-        return "login";
+        return "loginform";
 
     }
 
-    @PostMapping("/dologin")
-    public String doLogin(@Valid LoginCommand loginCommand, BindingResult bindingResult) {
+    @RequestMapping("logout-success")
+    public String loggedOut() {
 
-        if (bindingResult.hasErrors()) {
-            return "login";
-        }
-
-        return "dashboard";
+        return "logout-success";
 
     }
+
+//    @PostMapping("/doLogin")
+//    public String doLogin(@Valid LoginCommand loginCommand, BindingResult bindingResult) {
+//
+//        if (bindingResult.hasErrors()) {
+//            return "loginform";
+//        }
+//
+//        return "redirect:/index";
+//
+//    }
 
 }
